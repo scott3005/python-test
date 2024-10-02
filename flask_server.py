@@ -7,8 +7,6 @@ app=Flask(__name__)
 def main():
     return "hello world" 
 
-
-
 @app.route("/live")
 def live():
     return "live and ready"
