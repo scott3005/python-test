@@ -53,11 +53,11 @@ jobs:
         run: |
           docker build . --file Dockerfile --tag scottkurt/demo:TestApp-2.0
           docker save -o pythonapp.tar scottkurt/demo:TestApp-2.0
-          mkdir /artifacts/ && mv pythonapp.tar /artifacts/pythonapp.tar
+          mv pythonapp.tar /tmp/pythonapp.tar
       - uses: actions/upload-artifact@master
         with:
           name: pythonapp
-          path: /artifacts/pythonapp.tar
+          path: /tmp/pythonapp.tar
   deploy:
     needs: 
       - build
