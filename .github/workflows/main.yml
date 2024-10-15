@@ -66,10 +66,10 @@ jobs:
       - uses: actions/download-artifact@master
         with:
           name: pythonapp
-          path: /tmp/pythonapp.tar
+          path: /tmp
       - name: Load Docker Image
         run: |
-          docker load < /tmp/pythonapp.tar
+          docker load --input /tmp/pythonapp.tar
       - name: Deploy To Registry
         run: |
           echo "${{ secrets.dockerpw }}" | docker login -u "scottkurt" --password-stdin
