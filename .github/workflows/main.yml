@@ -50,7 +50,8 @@ jobs:
       - name: Build Image
         run: |
           docker build . --file Dockerfile --tag scottkurt/demo:TestApp-2.0
-      outputs: type=docker,dest=/tmp/pythonimage.tar
+    outputs: 
+      output1: type=docker,dest=/tmp/pythonimage.tar
   deploy:
     runs-on: ubuntu-latest
     steps:
