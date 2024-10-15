@@ -50,14 +50,19 @@ jobs:
       - name: Build Image
         run: |
           docker build . --file Dockerfile --tag scottkurt/demo:TestApp-2.0
-    outputs: 
-      output1: type=docker,dest=/tmp/pythonimage.tar
+      - uses: actions/upload-artifact@master
+        with:
+          name: my-artifact
+          path: /artifacts/
   deploy:
+    needs: 
+      - build
     runs-on: ubuntu-latest
     steps:
-      - name: load image
-        run: | 
-          docker load --input /tmp/pythonimage.tar
+      - uses: actions/download-artifact@master
+        with:
+          name: my-artifact
+          path: /artifacts/
       - name: Deploy To Registry
         run: |
           echo "${{ secrets.dockerpw }}" | docker login -u "scottkurt" --password-stdin
