@@ -49,10 +49,14 @@ jobs:
         uses: actions/checkout@v4
       - name: Build Image
         run: |
-          docker build . --file Dockerfile --tag scottkurt/demo:TestApp-1.0
+          docker build . --file Dockerfile --tag scottkurt/demo:TestApp-2.0
+      outputs: type=docker,dest=/tmp/pythonimage.tar
   deploy:
     runs-on: ubuntu-latest
     steps:
+      - name: load image
+        run: | 
+          docker load --input /tmp/pythonimage.tar
       - name: Deploy To Registry
         run: |
           echo "${{ secrets.dockerpw }}" | docker login -u "scottkurt" --password-stdin
