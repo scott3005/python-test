@@ -43,6 +43,8 @@ jobs:
       run: |
         python -m pytest
   build:
+    needs:
+      - test
     runs-on: ubuntu-latest
     steps:
       - name: Checkout repository
@@ -50,9 +52,10 @@ jobs:
       - name: Build Image
         run: |
           docker build . --file Dockerfile --tag scottkurt/demo:TestApp-2.0
+          docker save -o artifacts/pythonapp.tar scottkurt/demo:TestApp-2.0
       - uses: actions/upload-artifact@master
         with:
-          name: my-artifact
+          name: pythonapp.tar
           path: /artifacts/
   deploy:
     needs: 
@@ -61,7 +64,7 @@ jobs:
     steps:
       - uses: actions/download-artifact@master
         with:
-          name: my-artifact
+          name: pythonapp.tar
           path: /artifacts/
       - name: Deploy To Registry
         run: |
