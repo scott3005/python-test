@@ -54,6 +54,6 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Deploy To Registry
-      run: |
-        echo "${{ secrets.dockerpw }}" | docker login -u "scottkurt" --password-stdin
-        docker push scottkurt/demo:TestApp-1.0
+        run: |
+          echo "${{ secrets.dockerpw }}" | docker login -u "scottkurt" --password-stdin
+          docker push scottkurt/demo:TestApp-1.0
