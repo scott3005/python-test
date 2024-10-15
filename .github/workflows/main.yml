@@ -52,7 +52,7 @@ jobs:
       - name: Build Image
         run: |
           docker build . --file Dockerfile --tag scottkurt/demo:TestApp-2.0
-          docker save -o artifacts/pythonapp.tar scottkurt/demo:TestApp-2.0
+          docker save -o pythonapp.tar scottkurt/demo:TestApp-2.0
       - uses: actions/upload-artifact@master
         with:
           name: pythonapp.tar
