@@ -69,7 +69,7 @@ jobs:
           path: /tmp/pythonapp.tar
       - name: Load Docker Image
         run: |
-          docker load --input /tmp/pythonapp.tar
+          docker load < /tmp/pythonapp.tar
       - name: Deploy To Registry
         run: |
           echo "${{ secrets.dockerpw }}" | docker login -u "scottkurt" --password-stdin
