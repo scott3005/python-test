@@ -52,11 +52,11 @@ jobs:
       - name: Build Image
         run: |
           docker build . --file Dockerfile --tag scottkurt/demo:TestApp-2.0
-          docker save -o pythonapp.tar scottkurt/demo:TestApp-2.0
+          docker save -o ./pythonapp.tar scottkurt/demo:TestApp-2.0
       - uses: actions/upload-artifact@master
         with:
-          name: pythonapp.tar
-          path: /artifacts/
+          name: pythonapp
+          path: /artifacts/pythonapp.tar
   deploy:
     needs: 
       - build
@@ -64,9 +64,9 @@ jobs:
     steps:
       - uses: actions/download-artifact@master
         with:
-          name: pythonapp.tar
-          path: /artifacts/
+          name: pythonapp
+          path: /artifacts/pythonapp.tar
       - name: Deploy To Registry
         run: |
           echo "${{ secrets.dockerpw }}" | docker login -u "scottkurt" --password-stdin
-          docker push scottkurt/demo:TestApp-1.0
+          docker push scottkurt/demo:TestApp-2.0
