@@ -73,4 +73,6 @@ jobs:
       - name: Deploy To Registry
         run: |
           echo "${{ secrets.dockerpw }}" | docker login -u "scottkurt" --password-stdin
+          docker container run -p scottkurt/demo:TestApp-2.0
+          sleep 10 
           docker push scottkurt/demo:TestApp-2.0
