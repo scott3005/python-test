@@ -60,7 +60,7 @@ jobs:
       - uses: actions/download-artifact@master
         with:
           name: pythonapp
-          path: /tmp/pythonapp.tar
+          path: /tmp
       - name: Load Docker Image
         run: |
           docker load --input /tmp/pythonapp.tar
